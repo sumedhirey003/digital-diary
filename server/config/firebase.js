@@ -1,6 +1,6 @@
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../config/emp-digi-diary-firebase-adminsdk-qqd74-761bb37a42.json");
+var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 if (!admin.apps.length) {
   admin.initializeApp({
