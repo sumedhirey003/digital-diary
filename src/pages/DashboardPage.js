@@ -26,8 +26,7 @@ const DashboardPage = () => {
 
     try {
       console.log(`Attempting to fetch entries for userId: ${userId}`);
-      const response = await axiosInstance.get(`/api/entries/${userId}`);
-
+      const response = await axiosInstance.get(`/entries?userId=${userId}`);
       console.log("✅ API Response Data:", response.data);
 
       setEntries(response.data);
