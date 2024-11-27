@@ -5,8 +5,12 @@ const { db } = require("./config/firebase");
 
 const app = express();
 
+const allowedOrigins = [
+  "https://digital-diary-g8xa-sumedh-hireys-projects.vercel.app", // your frontend URL
+];
+
 const corsOptions = {
-  origin: "https://digital-diary-g8xa-sumedh-hireys-projects.vercel.app", // Frontend URL
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PATCH", "DELETE"], // Allowed methods
   allowedHeaders: ["Content-Type"], // Allowed headers
 };
