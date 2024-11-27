@@ -14,8 +14,8 @@ router.get("/:entryId", (req, res, next) => {
 
 //routes for diary entries
 router.post("/", addEntry);
-router.get("/:entryId", getEntries);
 router.get("/", getEntries);
+router.get("/:entryId", getEntries);
 router.patch("/:entryId", updateEntry);
 router.delete("/:entryId", deleteEntry);
 
