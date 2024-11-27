@@ -4,8 +4,15 @@ const diaryRoutes = require("./routes/diaryroutes");
 const { db } = require("./config/firebase");
 
 const app = express();
+
+const corsOptions = {
+  origin: "https://digital-diary-g8xa-sumedh-hireys-projects.vercel.app", // Frontend URL
+  methods: ["GET", "POST", "PATCH", "DELETE"], // Allowed methods
+  allowedHeaders: ["Content-Type"], // Allowed headers
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cors());
 
 db.collection("test")
   .get()
