@@ -10,11 +10,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 
-let currentUser = null;
-
 const trackAuthState = (callback) => {
   onAuthStateChanged(auth, (user) => {
-    currentUser = user;
     callback(user);
   });
 };
@@ -68,7 +65,21 @@ export const authService = {
       throw new Error(error.message);
     }
   },
+  getCurrentUser: () => {
+    const user = auth.currentUser;
+    return user || null;
+  },
+  getToken: async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      return token;
+    } else {
+      const user = auth.currentUser;
+      if (user) {
+        return await user.getIdToken();
+      }
+    }
+    return null;
+  },
   trackAuthState,
-
-  getCurrentUser: () => currentUser,
 };

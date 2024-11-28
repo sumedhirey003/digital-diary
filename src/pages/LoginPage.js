@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "../config/firebase";
 import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { authService } from "../services/auth.service";
+import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { Lock, User, Mail, Book, LogIn, UserPlus } from "lucide-react";
 import "../App.css";
@@ -38,11 +38,7 @@ const LoginPage = () => {
           authState.password
         );
       } else {
-        await signInWithEmailAndPassword(
-          auth,
-          authState.email,
-          authState.password
-        );
+        await authService.login(authState.email, authState.password);
       }
       navigate("/dashboard");
     } catch (error) {

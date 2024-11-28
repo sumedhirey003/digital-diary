@@ -1,6 +1,7 @@
 //src/components/DiaryEntriesList
 import React, { useCallback, useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
+import { auth } from "../config/firebase";
 
 const formatDate = (timestamp) => {
   if (!timestamp) return "Invalid Date";
@@ -35,7 +36,16 @@ const DiaryEntriesList = ({ userId, type, refreshTrigger }) => {
         setError("User ID is missing.");
         return;
       }
-      const response = await axiosInstance.get(`/entries?userId=${userId}`);
+
+      const token = await auth.currentUser.getIdToken();
+      localStorage.setItem("authToken", token);
+      console.log("Token stored in localStorage:", token);
+
+      const response = await axiosInstance.get(`/entries?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const sortedEntries = response.data.sort((a, b) => {
         const dateA = a.createdAt ? new Date(a.createdAt.seconds * 1000) : 0;
         const dateB = b.createdAt ? new Date(b.createdAt.seconds * 1000) : 0;

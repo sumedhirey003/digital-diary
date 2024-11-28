@@ -39,6 +39,7 @@ const DashboardPage = () => {
       let token;
       try {
         token = await user.getIdToken();
+        console.log("token from firebase:", token);
       } catch (err) {
         console.error("Error fetching Firebase token:", err);
         setError("Failed to authenticate. Please try logging in agian.");
