@@ -1,4 +1,4 @@
-// firebase.js
+// server/config/firebase.js
 require("dotenv").config();
 var admin = require("firebase-admin");
 

@@ -7,21 +7,24 @@ const verifyToken = require("./middlewares/authmiddleware");
 const app = express();
 
 const allowedOrigins = [
-  "https://digital-diary-m26y.vercel.app/", //front prod
-  "https://digital-diary-m26y-sumedh-hireys-projects.vercel.app/",
-  "https://digital-diary-m26y-git-master-sumedh-hireys-projects.vercel.app/", //git branch
-  "http://localhost:3000", // for local development
+  "https://digital-diary-m26y.vercel.app", //front prod
+  "https://digital-diary-m26y-sumedh-hireys-projects.vercel.app",
+  "https://digital-diary-m26y-git-master-sumedh-hireys-projects.vercel.app", //git branch
+  "http://localhost:3000",
+  "http://192.168.0.193:3000", // for local development
 ];
 
 const corsOptions = {
   origin: allowedOrigins,
-  methods: ["GET", "POST", "PATCH", "DELETE"], // Allowed methods
+  methods: ["GET", "HEAD", "PUT", "POST", "PATCH", "DELETE"], // Allowed methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   credentials: true,
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.options("*", cors(corsOptions));
 
 db.collection("test")
   .get()
@@ -43,9 +46,9 @@ app.use((req, res, next) => {
 });
 
 //API routing test
-//app.get("/api/test", (req, res) => {
-//res.json({ message: "API is working" });
-//});
+app.get("/api/test", (req, res) => {
+  res.json({ message: "API is working" });
+});
 
 //debugging
 
