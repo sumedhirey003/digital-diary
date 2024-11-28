@@ -7,7 +7,9 @@ const verifyToken = require("./middlewares/authmiddleware");
 const app = express();
 
 const allowedOrigins = [
-  "https://digital-diary-g8xa-sumedh-hireys-projects.vercel.app", // your frontend URL
+  "https://digital-diary-m26y.vercel.app/", //front prod
+  "https://digital-diary-m26y-sumedh-hireys-projects.vercel.app/",
+  "https://digital-diary-m26y-git-master-sumedh-hireys-projects.vercel.app/", //git branch
   "http://localhost:3000", // for local development
 ];
 
