@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const diaryRoutes = require("./routes/diaryroutes");
 const { db } = require("./config/firebase");
+const verifyToken = require(".");
 
 const app = express();
 
@@ -12,7 +13,8 @@ const allowedOrigins = [
 const corsOptions = {
   origin: allowedOrigins,
   methods: ["GET", "POST", "PATCH", "DELETE"], // Allowed methods
-  allowedHeaders: ["Content-Type"], // Allowed headers
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -24,7 +26,7 @@ db.collection("test")
   .catch((err) => console.error("Firebase test failed:", err));
 
 // Routes
-app.use("/api/entries", require("./routes/diaryroutes"));
+app.use("/api/entries", verifyToken, require("./routes/diaryroutes"));
 
 //catching all the unmatched routes,
 app.use((req, res) => {

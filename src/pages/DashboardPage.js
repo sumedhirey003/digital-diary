@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import AddEntryForm from "../components/AddEntryForm";
@@ -26,7 +26,32 @@ const DashboardPage = () => {
 
     try {
       console.log(`Attempting to fetch entries for userId: ${userId}`);
-      const response = await axiosInstance.get(`/entries?userId=${userId}`);
+
+      const user = getAuth().currentUser;
+
+      if (!user) {
+        console.error("No authenticated user found");
+        setError("Please Log in to view your entries");
+        setLoading(false);
+        return;
+      }
+
+      let token;
+      try {
+        token = await user.getIdToken();
+      } catch (err) {
+        console.error("Error fetching Firebase token:", err);
+        setError("Failed to authenticate. Please try logging in agian.");
+        setLoading(false);
+        return;
+      }
+      console.log("Fetched Firebase token:", token);
+
+      const response = await axiosInstance.get(`/entries?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log("✅ API Response Data:", response.data);
 
       setEntries(response.data);
