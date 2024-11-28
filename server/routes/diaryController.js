@@ -57,7 +57,7 @@ const addEntry = async (req, res) => {
 const getEntries = async (req, res) => {
   try {
     const { userId } = req.query; // For fetching entries by userId
-    const { entryId } = req.params; // For fetching a specific entry by entryId
+    const { entryId } = req.query; // For fetching a specific entry by entryId
 
     if (entryId) {
       // Fetch a specific entry by entryId

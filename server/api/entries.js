@@ -7,16 +7,20 @@ import {
 } from "../routes/diaryController"; // Adjust path if needed
 
 export default function handler(req, res) {
-  const { userId } = req.query;
+  const { userId, entryId } = req.query;
   try {
     switch (req.method) {
       case "POST":
         return addEntry(req, res); // Calls the addEntry controller
       case "GET":
         if (entryId) {
-          return getEntries(req, res); // fetchs single entry
+          return getEntries(req, res, entryId); // fetchs single entry
         }
-        return getEntries(req, res); // Calls the getEntries controller
+        if (userId) {
+          return getEntries(req, res, userId); // Calls the getEntries controller
+        } else {
+          return res.status(400).json({ message: "USer ID is required" });
+        }
       case "PUT":
         return updateEntry(req, res); // Calls the updateEntry controller
       case "DELETE":
