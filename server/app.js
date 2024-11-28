@@ -6,16 +6,16 @@ const verifyToken = require("./middlewares/authmiddleware");
 
 const app = express();
 
-const allowedOrigins = [
-  "https://digital-diary-m26y.vercel.app", //front prod
-  "https://digital-diary-m26y-sumedh-hireys-projects.vercel.app",
-  "https://digital-diary-m26y-git-master-sumedh-hireys-projects.vercel.app", //git branch
-  "http://localhost:3000",
-  "http://192.168.0.193:3000", // for local development
-];
+// const allowedOrigins = [
+//   "https://digital-diary-m26y.vercel.app", //front prod
+//   "https://digital-diary-m26y-sumedh-hireys-projects.vercel.app",
+//   "https://digital-diary-m26y-git-master-sumedh-hireys-projects.vercel.app", //git branch
+//   "http://localhost:3000",
+//   "http://192.168.0.193:3000", // for local development
+// ];
 
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: "https://digital-diary-m26y.vercel.app",
   methods: ["GET", "HEAD", "PUT", "POST", "PATCH", "DELETE"], // Allowed methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   credentials: true,
