@@ -2,12 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const diaryRoutes = require("./routes/diaryroutes");
 const { db } = require("./config/firebase");
-const verifyToken = require(".");
+const verifyToken = require("./middlewares/authmiddleware");
 
 const app = express();
 
 const allowedOrigins = [
   "https://digital-diary-g8xa-sumedh-hireys-projects.vercel.app", // your frontend URL
+  "http://localhost:3000", // for local development
 ];
 
 const corsOptions = {
