@@ -91,7 +91,10 @@ app.use((req, res, next) => {
 // app.use(allowCors(handler));
 
 app.options("*", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://digital-diary-m26y.vercel.app"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
