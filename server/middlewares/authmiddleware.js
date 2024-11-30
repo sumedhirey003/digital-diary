@@ -8,6 +8,7 @@ const verifyToken = async (req, res, next) => {
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       console.error("Authorization header missing or malformed");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       return res.status(401).json({ message: "No token provided" });
     }
 
@@ -20,6 +21,7 @@ const verifyToken = async (req, res, next) => {
     console.log("Token verified successfully:", decodedToken.uid);
     next();
   } catch (error) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     if (error.code === "auth/id-token-expired") {
       console.error("❌ Token expired");
       return res.status(401).json({ message: "Token expired" });

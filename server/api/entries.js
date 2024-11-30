@@ -31,6 +31,7 @@ export default function handler(req, res) {
     }
   } catch (error) {
     console.error("API Error: ", error);
+    res.setHeader("Access-Control-Allow-Origin", "*");
     return res.status(500).json({ message: "Internal Server Error" });
   }
 }
