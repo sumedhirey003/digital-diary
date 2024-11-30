@@ -90,7 +90,7 @@ app.use((req, res, next) => {
 // const handler = (req, res, next) => next();
 // app.use(allowCors(handler));
 
-app.options("*", (req, res) => {
+app.options("https://digital-diary-m26y.vercel.app", (req, res) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://digital-diary-m26y.vercel.app"
@@ -118,7 +118,10 @@ app.use((req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Unhandled Error:", err);
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://digital-diary-m26y.vercel.app"
+  );
   res.status(500).json({
     error: "Internal Server Error",
     message: err.message,
