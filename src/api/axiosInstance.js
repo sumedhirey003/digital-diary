@@ -3,7 +3,7 @@ import axios from "axios";
 import { getAuth, getIdToken } from "firebase/auth";
 
 const axiosInstance = axios.create({
-  baseURL: "https://digital-diary-two.vercel.app/api",
+  baseURL: "https://digital-diary-liart.vercel.app/api",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
